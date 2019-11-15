@@ -1,0 +1,5 @@
+-
+ hosts: all_nodes
+ tasks:
+      - local_action: shell > /<dest>/<filename>
+      - local_action: shell echo "{{ ansible_hostname }},{{ ansible_enps03.ipv4.address }},{{ ansible_processor }},{{ ansible_processor_cores }},{{ ansible_memtotal_mb }},{{ ansible_swaptotal_mb }}" >> /<dest>/filename> 	  
