@@ -1,0 +1,24 @@
+-
+  name: configure ssh
+  hosts: localhost
+  tasks:
+       - stat:
+            path: /root/.ssh/id_rsa
+            register: result
+       
+       - name: Generate ssh key
+         shell: ssh-keygen -t rsa -b 2048 -f /root/.ssh/id_rsa -q -N ""
+         when: register.stat.exists == false
+        
+       - debug:
+           msg: "key exists"
+          when: register.stat.exists
+          
+       - name: copy ssh key
+         shell: sshpass -p "osboxes.org" ssh-copy-id -i /root/.ssh/id_rsa root@"{{ item }}" -f -o StrictHostKeyChecking=no
+		 with_items:
+		         - "{{ nodes }}"
+				 
+				 
+	vars_files:
+       - def.yml
