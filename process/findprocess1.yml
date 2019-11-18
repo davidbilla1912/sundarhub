@@ -1,0 +1,13 @@
+-
+ name: Check process and status for ssh running
+ hosts: all
+ tasks:
+      - name: check ssh process ID
+	      shell: ps -eaf | egrep sshd | grep -v grep | awk '{print $2}'
+		    register: id
+		
+	    - name: check ssh status
+        shell: systemctl status sshd | grep active | awk '{print $2}'
+        register: status
+		
+	    - local_action: shell echo {"{{ ansible_hostname }},{{id.stdout}},{{status.stdout}}"} >> /<dest>/<filename>
