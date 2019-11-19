@@ -3,10 +3,10 @@
  hosts: all
  tasks:
       - name: check ssh process ID
-	      shell: ps -eaf | egrep sshd | grep -v grep | awk '{print $2}'
-		    register: id
+	shell: ps -eaf | egrep sshd | grep -v grep | awk '{print $2}'
+        register: id
 		
-	    - name: check ssh status
+      - name: check ssh status
         shell: systemctl status sshd | grep active | awk '{print $2}'
         register: status
   
@@ -17,4 +17,4 @@
            mode: 0666
            create: yes
         with_items:
-              - line : '{{ ansible_hostname	}}::{{ id.stdout }}::{{ status.stdout }}'
+              - line : '{{ ansible_hostname }}::{{ id.stdout }}::{{ status.stdout }}'
