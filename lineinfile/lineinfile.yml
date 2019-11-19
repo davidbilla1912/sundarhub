@@ -1,0 +1,25 @@
+-
+ name: Edit lineinfile sshd
+ hosts: all
+ tasks:
+      - lineinfile:
+	         path: /etc/ssh/sshd_config
+			     state: present
+			     regexp: "{{ item.regexp }}"
+			     line: "{{ item.line }}"
+		    with_items:
+            - {regexp: '^#PermitRootLogin yes', line: PermitRootLogin no }
+            - {regexp: '^#ClientAliveInterval 0', line: ClientAliveInterval 10 }
+            - {regexp: '^#ClientAliveCountMax 900', line: ClientAliveCountMax 800 }
+		    when: ansible_distribution == "Red Hat Enterprise Linux"
+		
+	    - lineinfile:
+	         path: /etc/ssh/sshd_config
+			     state: present
+			     regexp: "{{ item.regexp }}"
+			     line: "{{ item.line }}"
+		    with_items:
+            - {regexp: '^#PermitRootLogin yes', line: PermitRootLogin no }
+            - {regexp: '^#ClientAliveInterval 0', line: ClientAliveInterval 17 }
+            - {regexp: '^#ClientAliveCountMax 900', line: ClientAliveCountMax 850 }
+		    when: ansible_distribution == "SLES"
