@@ -1,0 +1,36 @@
+-
+ name: Create delete files and directories
+ hosts: target1
+ tasks:
+      - name: create a directory
+        file:
+           path: /home/osboxes/directory
+           state: directory
+
+      - name: create directory in loop
+        file:
+            path: /home/osboxes/{{ item }}
+            state: directory
+        with_items:
+              - dir1
+              - dir2
+
+      - name: delete directory
+        file:
+            path: /home/osboxes/{{ item }}
+            state: absent
+        with_items:
+              - directory
+              - dir1
+              - dir2
+
+      - name: create file
+        file:
+           path: /home/osboxes/file1
+           state: touch
+
+      - name: delete file
+        file:
+            path: /home/osboxes/file1
+            state: absent
+~
