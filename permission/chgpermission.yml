@@ -6,6 +6,7 @@
         file:
             path: /home/osboxes/test
             state: directory
+            recurse: yes
             owner: root
             group: root
             mode: 0755
