@@ -1,0 +1,15 @@
+-
+ name: symlink example
+ hosts: target1
+ tasks:
+      - name: create symlink or softlink
+        file:
+            src: /home/osboxes/file1
+            dest: /home/osboxes/file1_link
+            state: link
+
+      - name: create hardlink
+        file:
+            src: /home/osboxes/file1
+            dest: /home/osboxes/test/file1_link
+            state: hard
