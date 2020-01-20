@@ -1,0 +1,15 @@
+-
+ name: fetch example
+ hosts: target1
+ tasks:
+      - name: fetch the remoteserver to controller
+        fetch:
+            src: /home/osboxes/file1
+            dest: /root/test/
+            flat: true
+
+      - name: copy to remoteserver from controller
+        copy:
+            src: /root/test/file1
+            dest: /home/osboxes/copy/
+        when: "{{ ansible_hostname == 'target1' }}"
