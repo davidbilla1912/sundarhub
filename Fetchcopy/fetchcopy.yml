@@ -13,3 +13,12 @@
             src: /root/test/file1
             dest: /home/osboxes/copy/
         when: "{{ ansible_hostname == 'target1' }}"
+        
+
+      - name: copy file inside remote host
+        copy:
+           src: /home/osboxes/copy/file1
+           dest: /home/osboxes/copy/copy/
+           remote_src: yes
+
+
