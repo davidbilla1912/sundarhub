@@ -1,0 +1,12 @@
+-
+ name: change permission
+ hosts: target1
+ tasks:
+      - name: change directory permission
+        file:
+            path: /home/osboxes/test
+            state: directory
+            owner: root
+            group: root
+            mode: 0755
+        become: true
