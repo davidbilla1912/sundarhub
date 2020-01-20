@@ -1,0 +1,19 @@
+-
+ name: Archive files and directories
+ host: app1
+ tasks:
+      - name: Compress directory
+        archive:
+           src: /sourcepath/folder1
+           dest: /sourcepath/folder1.tgz
+           
+      - name: Compress directory and remove
+        archive:
+           src: /sourcepath/folder1
+           remove: yes
+           
+       - name: unarchive
+         unarchive:
+               src: /sourcepath/folder1.tgz
+               dest: /sourcepath/folder2
+               remote_src: yes
